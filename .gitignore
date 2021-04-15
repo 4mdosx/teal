@@ -3,3 +3,5 @@ dist
 draft
 .DS_Store
 package-lock.json
+database
+dump
