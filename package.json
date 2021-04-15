@@ -1,30 +1,21 @@
 {
-  "name": "cansgame",
+  "name": "loop_trace",
   "version": "0.0.1",
-  "description": "cans game",
+  "description": "loop trace",
   "scripts": {
-    "build": "node script/build"
+    "start": "ts-node src/cli/main.ts"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/syntachaosx/cansgame.git"
+    "url": "git+https://github.com/syntachaosx/loop-trace.git"
   },
   "keywords": [
     "Text Adventure Game"
   ],
   "author": "syntachaosx",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/syntachaosx/cansgame/issues"
-  },
-  "homepage": "https://github.com/syntachaosx/cansgame#readme",
-  "devDependencies": {
-    "clean-webpack-plugin": "^3.0.0",
-    "execa": "^4.0.3",
-    "html-webpack-plugin": "^4.4.1",
-    "ts-loader": "^8.0.3",
-    "typescript": "^4.0.2",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+  "dependencies": {
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
   }
 }
