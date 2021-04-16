@@ -1,7 +1,13 @@
 import readline from 'readline'
 import * as Timer from './timer'
 import * as Dice from './dice'
-import { stdin } from 'process'
+import World from '../engine/world'
+import { store } from '../store/main'
+
+const world = new World()
+world.tickTask = () => {
+  store.update()
+}
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -14,6 +20,12 @@ rl.prompt()
 rl.on('line', (line) => {
   const [cmd, ...args] = line.trim().split(' ')
   switch (cmd) {
+    case 'start':
+      world.start()
+      break
+    case 'stop':
+      world.stop()
+      break
     case 'roll':
       console.log(Dice.roll(args[0] || 'd20'))
       break

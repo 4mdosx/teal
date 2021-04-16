@@ -1,8 +1,15 @@
 
-export default class Ticker {
+interface Schedule {
+  execTime: number
+  fn: () => void
+}
+
+export default class World {
   lastTick: number = 0
-  tickLength: number = 100
-  stopTickFlag?: number
+  tickLength: number = 5 * 1000
+  stopTickFlag?: NodeJS.Timeout
+  tickTask?: () => void
+  schedules: Schedule[]
 
   start() {
     const now = Date.now()
@@ -23,13 +30,25 @@ export default class Ticker {
       numTicks = Math.floor(timeSinceTick / this.tickLength)
     }
 
-    if (numTicks) this.queueUpdates(numTicks)
+    if (numTicks) {
+      this.execSchedule(tFrame)
+      this.queueUpdates(numTicks)
+    }
+  }
+
+  execSchedule (now: number) {
+    this.schedules = this.schedules.filter(s => {
+      if (s.execTime < now) {
+        s.fn()
+      }
+      return s.execTime > now
+    })
   }
 
   queueUpdates(numTicks: number) {
     for (var i = 0; i < numTicks; i++) {
+      this.tickTask && this.tickTask()
       this.lastTick = this.lastTick + this.tickLength
-      // update state
     }
   }
 }
