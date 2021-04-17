@@ -1,13 +1,9 @@
 import readline from 'readline'
 import * as Timer from './timer'
 import * as Dice from './dice'
-import World from '../engine/world'
 import { store } from '../store/main'
-
-const world = new World()
-world.tickTask = () => {
-  store.update()
-}
+import { argvToAction } from '../utils/main'
+import * as gameSaveUtils from '../utils/gameSave'
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -20,11 +16,17 @@ rl.prompt()
 rl.on('line', (line) => {
   const [cmd, ...args] = line.trim().split(' ')
   switch (cmd) {
-    case 'start':
-      world.start()
+    case 'state':
+      console.log(store.state)
       break
-    case 'stop':
-      world.stop()
+    case 'dispatch':
+      const action = argvToAction(line.trim())
+      if (!action) {
+        console.log('invalid dispatch action')
+        break
+      }
+      store.dispatch(action)
+      console.log(store.state)
       break
     case 'roll':
       console.log(Dice.roll(args[0] || 'd20'))
@@ -39,6 +41,7 @@ rl.on('line', (line) => {
   }
   rl.prompt()
 }).on('close', () => {
+  gameSaveUtils.save(store.state)
   console.log('Have a great day!')
   process.exit(0)
 })

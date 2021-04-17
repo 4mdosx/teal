@@ -5,3 +5,5 @@ draft
 package-lock.json
 database
 dump
+archives
+modules
