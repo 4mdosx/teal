@@ -12,14 +12,6 @@ class Store {
   reducer
   mapper
 
-  constructor () {
-    const { state, reducer, mapper } = moduleLoader.init()
-    this.state = state
-    this.reducer = reducer
-    this.mapper = mapper
-    this.useMapper()
-  }
-
   private useReducer (action) {
     const nextState = JSON.parse(JSON.stringify(this.state))
     this.reducer.forEach(r => {
@@ -41,6 +33,14 @@ class Store {
     this.useMapper()
   }
 
+  async init () {
+    const { state, reducer, mapper } = await moduleLoader.init()
+    this.state = state
+    this.reducer = reducer
+    this.mapper = mapper
+    this.useMapper()
+  }
+
   load (game) {
     const gameState = preFlightArchvie(game)
     this.state = gameState
@@ -52,12 +52,10 @@ const preFlightArchvie = (a) => {
   return a
 }
 
-const initStore = () => {
+export const createStore = async () => {
   const store = new Store()
-  gameSaveUtils.load().then((game) => {
-    if (game) store.load(game)
-  })
+  await store.init()
+  const game = await gameSaveUtils.load()
+  if (game) store.load(game)
   return store
 }
-
-export const store = initStore()

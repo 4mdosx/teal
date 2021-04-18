@@ -1,9 +1,12 @@
 import readline from 'readline'
 import * as Timer from './timer'
 import * as Dice from './dice'
-import { store } from '../store/main'
+import { createStore } from '../store/main'
 import { argvToAction } from '../utils/main'
 import * as gameSaveUtils from '../utils/gameSave'
+
+let store: any
+createStore().then(s => store = s)
 
 const rl = readline.createInterface({
   input: process.stdin,

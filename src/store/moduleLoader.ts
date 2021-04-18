@@ -1,35 +1,28 @@
-// load file from modules folder
-const modules = {
-  power: {},
-  intelligent: {},
-  network: {},
-  material: {
-    cube: {
-      initValue () { return { amount: 0 } },
-      reducer ({ prevState, nextState }, action) {
-        switch (action.name) {
-          case 'CUBE_AMOUNT_CHANGE':
-            nextState.material.cube.amount = prevState.material.cube.amount + Number(action.payload)
-            break
-        }
-      },
-      mapper ({ state, prevStatus, nextStatus }) {}
-    }
-  },
-  building: {},
-  tech: {},
-  unit: {},
+import fs from 'fs'
+import path from 'path'
+
+const loadModules = async (folderPath) => {
+  const folderFiles = fs.readdirSync(folderPath)
+  const modules = {}
+  for await (const fileName of folderFiles) {
+    const filePath = path.resolve('.', folderPath, fileName)
+    console.log(filePath)
+    const module = (await import(filePath)).default
+    console.log(module)
+    modules[module.name || fileName] = module
+  }
+  return modules
 }
 
 export default {
-  init () {
+  async init () {
     const state: any = {}
     const reducer = []
     const mapper = []
 
     // use material module
     const material: any = {}
-    Object.entries(modules.material).forEach(([name, module]) => {
+    Object.entries<any>(await loadModules('./modules/material')).forEach(([name, module]) => {
       material[name] = module.initValue()
       reducer.push(module.reducer)
       mapper.push(module.mapper)
