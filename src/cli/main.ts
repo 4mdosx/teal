@@ -1,3 +1,4 @@
+import './loadEnv'
 import readline from 'readline'
 import * as Timer from './timer'
 import * as Dice from './dice'

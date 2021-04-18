@@ -7,3 +7,4 @@ database
 dump
 archives
 modules
+.env
