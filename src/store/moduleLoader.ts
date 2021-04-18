@@ -6,9 +6,7 @@ const loadModules = async (folderPath) => {
   const modules = {}
   for await (const fileName of folderFiles) {
     const filePath = path.resolve('.', folderPath, fileName)
-    console.log(filePath)
     const module = (await import(filePath)).default
-    console.log(module)
     modules[module.name || fileName] = module
   }
   return modules
