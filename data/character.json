@@ -1,0 +1,31 @@
+{
+  "player": {
+    "level": {
+      "name": "等级",
+      "val": 0,
+      "unit": true,
+      "mod": {}
+    },
+    "exp": {
+      "val": 0,
+      "unit": false,
+      "locked": false,
+      "name": "经验值"
+    },
+    "hp": {
+      "name": "生命",
+      "desc": "生命力",
+      "val": 5,
+      "max": 5,
+      "unit": false,
+      "locked": false
+    },
+    "stamina": {
+      "name": "耐力",
+      "max": 10,
+      "val": 10,
+      "unit": false,
+      "locked": false
+    }
+  }
+}

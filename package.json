@@ -1,16 +1,16 @@
 {
-  "name": "loop_trace",
+  "name": "loop_game",
   "version": "0.0.1",
-  "description": "loop trace",
+  "description": "loop game",
   "scripts": {
     "cli": "ts-node src/cli/main.ts"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/syntachaosx/loop-trace.git"
+    "url": "git+https://github.com/syntachaosx/loop-game.git"
   },
   "keywords": [
-    "Text Adventure Game"
+    "An Adventure Game"
   ],
   "author": "syntachaosx",
   "license": "ISC",
