@@ -1,0 +1,28 @@
+.app-footer {
+  font-size: 14px;
+  height: 75px;
+  width: 100%;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+  background-color: #1A1A1A;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.app-footer .tab {
+  text-align: center;
+  color: #828282;
+}
+
+.app-footer .tab.active {
+  color: #53D66B;
+}
+
+.app-footer .tab svg {
+  width: 26px;
+  height: 26px;
+}
